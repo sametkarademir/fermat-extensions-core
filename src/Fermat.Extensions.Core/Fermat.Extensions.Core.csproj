@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <PackageId>Fermat.Extensions.Core</PackageId>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>0.0.0</Version>
+        <Version>0.0.1</Version>
         <Authors>Samet Karademir</Authors>
         <PackageTags>extensions;dotnet;utilities</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
