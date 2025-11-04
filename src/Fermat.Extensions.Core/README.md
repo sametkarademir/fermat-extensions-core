@@ -1,0 +1,9 @@
+# Fermat.Extensions.Core
+
+Fermat.Extensions.Core is a .NET library that provides a collection of extension methods to enhance the functionality of existing types and simplify common programming tasks.
+
+## Installation
+
+``` bash
+   dotnet add package Fermat.Extensions.Core
+```
