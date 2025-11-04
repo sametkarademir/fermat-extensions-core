@@ -32,16 +32,21 @@ if ! gh auth status &> /dev/null; then
     exit 1
 fi
 
-# Get current version from .csproj file
-CURRENT_VERSION=$(grep -oP '<Version>\K[0-9.]+' "$PROJECT_FILE" || echo "1.0.0")
+# Get current version from .csproj file (macOS and Linux compatible)
+CURRENT_VERSION=$(grep -oE '<Version>[0-9.]+</Version>' "$PROJECT_FILE" | sed -E 's/<Version>([0-9.]+)<\/Version>/\1/' || echo "0.0.0")
 IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
-MAJOR=${VERSION_PARTS[0]:-1}
+MAJOR=${VERSION_PARTS[0]:-0}
 MINOR=${VERSION_PARTS[1]:-0}
 PATCH=${VERSION_PARTS[2]:-0}
 
 # Determine version bump type
 BUMP_TYPE=${1:-patch}
 PRE_RELEASE=${2:-""}
+
+# Ensure version parts are numbers
+MAJOR=${MAJOR:-0}
+MINOR=${MINOR:-0}
+PATCH=${PATCH:-0}
 
 case $BUMP_TYPE in
     major)
