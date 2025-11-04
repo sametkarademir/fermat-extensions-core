@@ -122,7 +122,13 @@ git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
 
 # Push changes and tags
 echo -e "${GREEN}Pushing changes and tags to remote...${NC}"
-git push
+# Check if upstream is set, if not set it automatically
+if ! git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
+    echo -e "${YELLOW}Setting upstream branch...${NC}"
+    git push --set-upstream origin $(git branch --show-current)
+else
+    git push
+fi
 git push --tags
 
 # Create GitHub release
